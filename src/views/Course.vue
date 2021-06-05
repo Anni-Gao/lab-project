@@ -85,7 +85,7 @@
               <el-button
                 type="text"
                 v-if="scope.row.id != editId"
-                @click="delClick(scope.row)"
+                @click="delClick(scope.$index, scope.row)"
                 size="small"
               >
                 删除
@@ -151,13 +151,8 @@ export default {
   },
   methods: {
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    delClick(row) {
-      if (row.id) {
-        for (let i in row) {
-          row[i] = this.editData[i];
-        }
-        this.editId = "";
-      }
+    delClick(index) {
+      this.tableData.splice(index, 1);
     },
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     cancelClick(row) {
