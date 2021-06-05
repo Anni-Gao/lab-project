@@ -28,8 +28,8 @@
             <template #title>
               <i class="el-icon-date">预约管理</i>
             </template>
-            <el-menu-item index="/index/reservation">实验室预约</el-menu-item>
-            <el-menu-item index="/index/courses">课程管理</el-menu-item>
+            <el-menu-item index="/reservation">实验室预约</el-menu-item>
+            <el-menu-item index="/courses">课程管理</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>

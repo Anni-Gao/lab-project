@@ -25,15 +25,17 @@ const routes: Array<RouteRecordRaw> = [
         path: "teachers",
         component: () => import("@/views/Teacher.vue"),
       },
-      {
-        path: "courses",
-        component: () => import("@/views/Course.vue"),
-      },
-      {
-        path: "reservation",
-        component: () => import("@/views/Reservation.vue"),
-      },
     ],
+  },
+  {
+    path: "/courses",
+    name: "Courses",
+    component: () => import("@/views/Course.vue"),
+  },
+  {
+    path: "/reservation",
+    name: "Reservation",
+    component: () => import("@/views/Reservation.vue"),
   },
 ];
 

@@ -36,11 +36,7 @@ import { State } from "@/store";
 import { LOGIN } from "@/store/VuexTypes";
 import { computed, defineComponent, Ref, ref } from "vue";
 import { Store, useStore } from "vuex";
-
-interface User {
-  username?: string;
-  password?: string;
-}
+import { User } from "@/datasource/Types";
 
 function useLogin(userForm: Ref<User>, store: Store<State>) {
   const login = () => {

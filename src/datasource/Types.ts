@@ -3,3 +3,8 @@ export interface User {
   password?: string;
   level?: string;
 }
+export interface Course {
+  coursename?: string;
+  teachername?: string;
+  hours?: number;
+}
