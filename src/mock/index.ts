@@ -55,13 +55,25 @@ mock.onPost("login").reply((c) => {
 });
 
 // 模拟请求携带token是否合法
-mock.onGet("home").reply((c) => {
+mock.onGet("lab").reply((c) => {
   const auth = c.headers?.authorization;
   if (
     auth ==
-      "744193c872b677aab12a0ced447882f4cf9fca92a09d428a26ed145ed2ed2eec665c8824ebc353042ba2be136efcb5c6" ||
+    "744193c872b677aab12a0ced447882f4cf9fca92a09d428a26ed145ed2ed2eec665c8824ebc353042ba2be136efcb5c6"
+  ) {
+    resulVO.code = 200;
+    return [200, resulVO];
+  }
+  resulVO.code = 403;
+  resulVO.message = "无权限";
+  return [200, resulVO];
+});
+
+mock.onGet("teacher").reply((c) => {
+  const auth = c.headers?.authorization;
+  if (
     auth ==
-      "744193c872b677aab12a0ced447882f4cf9fca92a09d428a26ed145ed2ed2eec665c8824ebc353042ba2be136efcb5c7"
+    "744193c872b677aab12a0ced447882f4cf9fca92a09d428a26ed145ed2ed2eec665c8824ebc353042ba2be136efcb5c6"
   ) {
     resulVO.code = 200;
     return [200, resulVO];

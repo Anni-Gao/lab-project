@@ -1,4 +1,5 @@
 import axios from "@/axios";
+import router from "@/router";
 import { User } from "@/datasource/Types";
 import { ResultVO } from "@/mock";
 import { ActionTree, createStore, GetterTree, MutationTree } from "vuex";
@@ -31,12 +32,22 @@ const myActions: ActionTree<State, State> = {
       console.log(resp.headers.token);
       sessionStorage.setItem("token", resp.headers.token);
       commit(vxt.UPDATE_USER, resp.data.data.user);
+      router.push("/home");
     } catch (error) {
       // eslint默认禁止空执行体。加一段注释或关闭该检测
     }
   },
+  [vxt.GET_LAB]: async ({ commit }) => {
+    // 未捕获异常，请求失败在控制台输出信息
+    const resp = await axios.get<ResultVO>("lab");
+    commit(vxt.GET_LAB, resp.data.data?.courses);
+  },
+  [vxt.GET_TEACHER]: async ({ commit }) => {
+    // 未捕获异常，请求失败在控制台输出信息
+    const resp = await axios.get<ResultVO>("teacher");
+    commit(vxt.GET_TEACHER, resp.data.data.user);
+  },
 };
-
 const myGetters: GetterTree<State, State> = {
   premission: (state) => (level: string) => state.user?.level == level,
   [vxt.GETTER_PREMISSION]: (state) => (level: string) =>
