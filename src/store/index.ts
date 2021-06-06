@@ -39,13 +39,17 @@ const myActions: ActionTree<State, State> = {
   },
   [vxt.GET_LAB]: async ({ commit }) => {
     // 未捕获异常，请求失败在控制台输出信息
+    router.push("/labs");
     const resp = await axios.get<ResultVO>("lab");
-    commit(vxt.GET_LAB, resp.data.data?.courses);
+    commit(vxt.GET_LAB, resp.data.data?.lab);
+    router.push("/labs");
   },
   [vxt.GET_TEACHER]: async ({ commit }) => {
     // 未捕获异常，请求失败在控制台输出信息
+    router.push("/teachers");
     const resp = await axios.get<ResultVO>("teacher");
-    commit(vxt.GET_TEACHER, resp.data.data.user);
+    commit(vxt.GET_TEACHER, resp.data.data.teacher);
+    router.push("/teachers");
   },
 };
 const myGetters: GetterTree<State, State> = {
