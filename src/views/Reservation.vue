@@ -37,7 +37,12 @@
       </el-aside>
       <el-main>
         <h2>实验室预约管理</h2>
-        <el-select v-model="value1" clearable placeholder="请选择实验室">
+        <el-select
+          v-model="value1"
+          @change="selectLab"
+          clearable
+          placeholder="请选择实验室"
+        >
           <el-option
             v-for="item in options1"
             :key="item.value1"
@@ -50,6 +55,24 @@
           <el-option
             v-for="item in options2"
             :key="item.value2"
+            :label="item.label"
+            :value="item.value"
+          ></el-option>
+        </el-select>
+
+        <el-select v-model="value3" clearable placeholder="请选择日期">
+          <el-option
+            v-for="item in options3"
+            :key="item.value3"
+            :label="item.label"
+            :value="item.value"
+          ></el-option>
+        </el-select>
+
+        <el-select v-model="value4" clearable placeholder="请选择节次">
+          <el-option
+            v-for="item in options4"
+            :key="item.value4"
             :label="item.label"
             :value="item.value"
           ></el-option>
@@ -68,16 +91,12 @@
           </tr>
           <tr v-for="(s, index) of section" :key="index">
             <th>{{ s.name }}</th>
-            <td v-for="(w, index) of week" :key="index">
-              <span
-                @click="reserveByWeekAndSection(s.id, w)"
-                style="cursor: pointer; color: green"
-              >
-                预约
-              </span>
-            </td>
+            <td v-for="(w, index) of week" :key="index"></td>
           </tr>
         </table>
+        <br />
+        {{ selectedLabName }}
+        <el-button type="primary" @click="add">预约</el-button>
       </el-main>
     </el-container>
   </el-container>
@@ -199,6 +218,58 @@ export default {
           label: "第十八周",
         },
       ],
+      options3: [
+        {
+          value: "选项1",
+          label: "周一",
+        },
+        {
+          value: "选项2",
+          label: "周二",
+        },
+        {
+          value: "选项3",
+          label: "周三",
+        },
+        {
+          value: "选项4",
+          label: "周四",
+        },
+        {
+          value: "选项5",
+          label: "周五",
+        },
+        {
+          value: "选项6",
+          label: "周六",
+        },
+        {
+          value: "选项7",
+          label: "周日",
+        },
+      ],
+      options4: [
+        {
+          value: "选项1",
+          label: "一二节",
+        },
+        {
+          value: "选项2",
+          label: "三四节",
+        },
+        {
+          value: "选项3",
+          label: "五六节",
+        },
+        {
+          value: "选项4",
+          label: "七八节",
+        },
+        {
+          value: "选项5",
+          label: "九十节",
+        },
+      ],
       section: [
         {
           id: 1,
@@ -223,7 +294,21 @@ export default {
       ],
       value1: "",
       value2: "",
+      value3: "",
+      value4: "",
     };
+  },
+  methods: {
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    selectLab(id) {
+      console.log("select中对应value值", id);
+      let selectedLabName = {};
+      selectedLabName = this.options.find((item) => {
+        return item.value === id;
+        //筛选出匹配数据，是对应数据的整个对象
+      });
+      return selectedLabName;
+    },
   },
 };
 </script>

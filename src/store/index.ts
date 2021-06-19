@@ -1,29 +1,35 @@
 import axios from "@/axios";
 import router from "@/router";
-import { User } from "@/datasource/Types";
+import { User, Teacher } from "@/datasource/Types";
 import { ResultVO } from "@/mock";
 import { ActionTree, createStore, GetterTree, MutationTree } from "vuex";
 import * as vxt from "./VuexTypes";
 
 export interface State {
   user: User;
+  teacher: Teacher;
   exception: string;
   isLogin: boolean;
 }
 
 const myState: State = {
   user: {},
+  teacher: {},
   exception: "",
   isLogin: false,
 };
 const myMutations: MutationTree<State> = {
   [vxt.UPDATE_USER]: (state, data: User) => (state.user = data),
+  [vxt.UPDATE_TEACHER]: (state, data: User) => (state.teacher = data),
   [vxt.UPDATE_EXCEPTION]: (state, data: string) => (state.exception = data),
 };
 
 const myActions: ActionTree<State, State> = {
   [vxt.UPDATE_USER]: ({ commit }, data: User) => {
     setTimeout(() => commit(vxt.UPDATE_USER, data), 2000);
+  },
+  [vxt.UPDATE_TEACHER]: ({ commit }, data: Teacher) => {
+    setTimeout(() => commit(vxt.UPDATE_TEACHER, data), 2000);
   },
   [vxt.LOGIN]: async ({ commit }, user) => {
     // try可避免控制台的未捕获异常信息
